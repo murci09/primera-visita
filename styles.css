@@ -1,4 +1,4 @@
-:root{--sand:#e6e2d9;--cream:#f7f4ed;--ink:#171716;--red:#e2321f}
+:root{--sand:#e6e2d9;--cream:#f7f4ed;--ink:#171716;--red:#a99078}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;overflow-x:hidden}
 body{margin:0;background:var(--sand);color:var(--ink);font-family:'DM Sans',sans-serif}
