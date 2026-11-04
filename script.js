@@ -101,3 +101,27 @@ if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-mot
 } else {
   fadeItems.forEach(item => item.classList.add('is-visible'));
 }
+
+// Capitaliza la primera letra de cada bloque de texto visible.
+function capitalizeVisibleText(root = document.body) {
+  const excludedTags = new Set(['SCRIPT', 'STYLE', 'INPUT', 'SELECT', 'OPTION', 'TEXTAREA']);
+  const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+  let node;
+
+  while ((node = walker.nextNode())) {
+    if (!node.parentElement || excludedTags.has(node.parentElement.tagName)) continue;
+    if (node.parentElement.closest('.instagram-link, svg, noscript')) continue;
+
+    const value = node.nodeValue;
+    const match = value.match(/[\p{L}\d]/u);
+    if (!match) continue;
+
+    const index = match.index;
+    const character = match[0];
+    if (!/[a-záéíóúüñ]/iu.test(character)) continue;
+
+    node.nodeValue = value.slice(0, index) + character.toUpperCase() + value.slice(index + 1);
+  }
+}
+
+capitalizeVisibleText();
